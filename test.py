@@ -27,7 +27,7 @@ class Data:
         print("reference_frame: " + self.ground_truth.reference_frame)
         print("noisy_heading: " + str(self.noisy_heading))
         print("noisy_distance: " + str(self.noisy_distance))
-
+        print("scan_data: " + str(self.scan_data))
 
 
 class GroundTruth:
@@ -53,6 +53,12 @@ lines = [line.rstrip('\n') for line in open("./Trajectory/trajectories_1.txt")]
 
 list_of_trajectory = []
 
+# data = Data()
+# data.scan_data = lines[33][11:]
+# data.scan_data = data.scan_data.split(", ")
+# data.scan_data[-1] = data.scan_data[-1][:-1]
+# print(data.scan_data)
+
 for i in range(4, len(lines), 30):
     print(i)
     data = Data()
@@ -75,8 +81,15 @@ for i in range(4, len(lines), 30):
     data.ground_truth.reference_frame = lines[i + 23][19:]
     data.noisy_heading = float(lines[i + 25][8:])
     data.noisy_distance = float(lines[i + 27][8:])
-    data.scan_data = lines[i + 29][8:]
+    data.scan_data = lines[i + 29][11:]
+    data.scan_data = data.scan_data.split(", ")
+    data.scan_data[-1] = data.scan_data[-1][:-1]
+
+    for j in range(len(data.scan_data)):
+        data.scan_data[j] = float(data.scan_data[j])
+
     data.to_string()
+    list_of_trajectory.append(data)
     print()
 
 
