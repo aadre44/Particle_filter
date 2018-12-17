@@ -339,7 +339,7 @@ for t in range(steps):
 
     index = int(random.random() * n) #pick a random index
     beta = 0.0 #will be used to prioritize the higher weighted particles
-    maxW = max(w) #max weight
+    maxW = max(weights) #max weight
 
     for i in range(n):
         beta += random.random() * 2.0 * maxW
